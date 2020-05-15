@@ -1,0 +1,6 @@
+node_module/
+migrations/
+seeders/
+*.log
+yarn.lock
+.DS_Store
