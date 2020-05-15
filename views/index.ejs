@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>CRUD notice board</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <h1>CRUD Notice Board</h1>
+        <%if(isToken) {%>
+        <p>환영합니다, 님.</p>
+        <form action="/user/logout" method="get">
+            <input type="submit" value="로그아웃" />
+        </form>
+        <%} else {%>
+        <a href="/user/signin">로그인하러 가기</a>
+        <% }%>
+    </body>
+</html>

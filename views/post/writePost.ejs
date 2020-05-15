@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>CRUD notice board</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <h1>CRUD Notice Board</h1>
+        <form action="/post/write" method="POST">
+            <input
+                placeholder="제목을 입력하세요."
+                type="text"
+                name="title"
+            /><br />
+            <input
+                placeholder="글쓴이를 입력하세요"
+                type="text"
+                name="author"
+            /><br />
+            <input
+                placeholder="내용을 입력하세요."
+                type="text"
+                name="content"
+            /><br />
+            <input type="submit" value="제출" />
+        </form>
+        <a href="/">메인으로</a><br />
+    </body>
+</html>

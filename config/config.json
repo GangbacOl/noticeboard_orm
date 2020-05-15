@@ -1,0 +1,26 @@
+{
+    "development": {
+        "username": "GangbacOl",
+        "password": "asdf1145",
+        "database": "notice_board_with_orm",
+        "host": "127.0.0.1",
+        "dialect": "mysql",
+        "operatorsAliases": false
+    },
+    "test": {
+        "username": "GangbacOl",
+        "password": "asdf1145",
+        "database": "notice_board_with_orm",
+        "host": "127.0.0.1",
+        "dialect": "mysql",
+        "operatorsAliases": false
+    },
+    "production": {
+        "username": "GangbacOl",
+        "password": "asdf1145",
+        "database": "notice_board_with_orm",
+        "host": "127.0.0.1",
+        "dialect": "mysql",
+        "operatorsAliases": false
+    }
+}
