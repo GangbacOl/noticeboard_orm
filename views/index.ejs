@@ -17,6 +17,9 @@
             <hr />
             <span><%= post.author %></span>
             <p><%= post.content %></p>
+            <form action="/post/delete/<%= post.id %>" method="DELETE">
+                <input type="submit" value="삭제" />
+            </form>
         </div>
         <% } %> <%} else {%>
         <a href="/auth/signin">로그인하러 가기</a>
