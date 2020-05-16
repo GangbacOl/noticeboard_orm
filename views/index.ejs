@@ -6,12 +6,20 @@
     <body>
         <h1>CRUD Notice Board</h1>
         <%if(isToken) {%>
-        <p>환영합니다, 님.</p>
-        <form action="/user/logout" method="get">
+        <p>환영합니다, <%= username %>님.</p>
+        <a href="/post/write">글쓰러 가기</a>
+        <form action="/auth/logout" method="get">
             <input type="submit" value="로그아웃" />
         </form>
-        <%} else {%>
-        <a href="/user/signin">로그인하러 가기</a>
+        <% for(let post of posts) { %>
+        <div>
+            <h2><%= post.title %></h2>
+            <hr />
+            <span><%= post.author %></span>
+            <p><%= post.content %></p>
+        </div>
+        <% } %> <%} else {%>
+        <a href="/auth/signin">로그인하러 가기</a>
         <% }%>
     </body>
 </html>
