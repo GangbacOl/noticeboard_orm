@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use('/', require('./routes/main/index'));
-app.use('/user', require('./routes/user/index'));
+app.use('/auth', require('./routes/auth/index'));
 app.use('/post', require('./routes/post/index'));
 
 app.set('jwt-secret', config.secret);
