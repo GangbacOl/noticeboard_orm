@@ -21,3 +21,13 @@ exports.readAllPost = (res) => {
             });
         });
 };
+
+exports.deletePost = (res, id) => {
+    models.post
+        .destroy({
+            where: { id },
+        })
+        .then(() => {
+            res.redirect('/');
+        });
+};
