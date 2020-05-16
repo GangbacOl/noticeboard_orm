@@ -1,6 +1,7 @@
 const express = require('express');
 const models = require('../../models');
 const jwt = require('jsonwebtoken');
+const postMiddleware = require('../../middlewares/post/post');
 
 const router = express.Router();
 router.use(express.json());
@@ -11,7 +12,8 @@ router.get('/write', (req, res) => {
 
 // 포스트 작성
 router.post('/write', (req, res) => {
-    const { title, author, content } = req.body;
+    const { title, content } = req.body;
+    const author = postMiddleware.username;
     const secret = req.app.get('jwt-secret');
     const token = req.cookies.user;
     // ''일때 DB에서 NULL값으로 인식하지 못하는것.
@@ -28,11 +30,8 @@ router.post('/write', (req, res) => {
                 author,
                 content,
             })
-            .then((result) => {
-                res.json({
-                    message: '포스트 작성 완료',
-                    result,
-                });
+            .then(() => {
+                res.redirect('/');
             })
             .catch((err) => {
                 console.log(err);
