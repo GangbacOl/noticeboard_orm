@@ -69,20 +69,16 @@ router.get('/read', (req, res) => {
 router.put('/update/:id', (req, res) => {});
 
 // 포스트 삭제
-router.delete('delete/:id', (req, res) => {
-    // const id = req.params.id;
-    // const secret = req.app.get('jwt-secret');
-    // if (!req.headers.cookie)
-    //     res.status(403).json({ message: '접근권한이 없음.' });
-    // const token = req.headers.cookie.replace('user=', '');
-    // let accessFlag = jwt.verify(token, secret);
-    // if (accessFlag) {
-    //     models.post
-    //         .destroy({
-    //             where: { id },
-    //         })
-    //         .then(() => {});
-    // }
+router.delete('/delete/:id', (req, res) => {
+    const id = req.params.id;
+    const secret = req.app.get('jwt-secret');
+    if (!req.headers.cookie)
+        res.status(403).json({ message: '접근권한이 없음.' });
+    const token = req.headers.cookie.replace('user=', '');
+    let accessFlag = jwt.verify(token, secret);
+    if (accessFlag) {
+        postMiddleware.deletePost(res, id);
+    }
 });
 
 module.exports = router;
