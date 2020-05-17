@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>수정하기</h1>
+        <hr />
+        <h2><%= post.title %></h2>
+        <form action="/post/update/<%= post.id %>?_method=PUT" method="post">
+            <input type="text" name="title" placeholder="title" />
+            <p><%= post.content %></p>
+            <input type="text" name="content" placeholder="content" />
+            <br />
+            <input type="submit" value="전송하기" />
+        </form>
+    </body>
+</html>
