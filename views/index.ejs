@@ -1,7 +1,6 @@
 <html>
     <head>
         <title>CRUD notice board</title>
-        <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
         <h1>CRUD Notice Board</h1>
@@ -17,7 +16,10 @@
             <hr />
             <span><%= post.author %></span>
             <p><%= post.content %></p>
-            <form action="/post/delete/<%= post.id %>" method="DELETE">
+            <form
+                action="/post/delete/<%= post.id %>?_method=DELETE"
+                method="post"
+            >
                 <input type="submit" value="삭제" />
             </form>
         </div>
