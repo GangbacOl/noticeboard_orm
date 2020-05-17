@@ -10,6 +10,11 @@ router.get('/write', (req, res) => {
     res.render('post/writePost', {});
 });
 
+router.get('/update/:id', (req, res) => {
+    const id = req.params.id;
+    postMiddleware.readOnePost(res, id);
+});
+
 // 포스트 작성
 router.post('/write', (req, res) => {
     const { title, content } = req.body;
@@ -66,7 +71,18 @@ router.get('/read', (req, res) => {
 });
 
 // 포스트 업데이트
-router.put('/update/:id', (req, res) => {});
+router.post('/update/:id', (req, res) => {
+    const id = req.params.id;
+    const { title, content } = req.body;
+    const secret = req.app.get('jwt-secret');
+    if (!req.headers.cookie)
+        res.status(403).json({ message: '접근권한이 없음.' });
+    const token = req.headers.cookie.replace('user=', '');
+    let accessFlag = jwt.verify(token, secret);
+    if (accessFlag) {
+        postMiddleware.updatePost(req, res, id, title, content);
+    }
+});
 
 // 포스트 삭제
 router.post('/delete/:id', (req, res) => {
