@@ -22,6 +22,34 @@ exports.readAllPost = (res) => {
         });
 };
 
+exports.readOnePost = (res, id) => {
+    models.post
+        .findOne({
+            where: { author: username, id },
+        })
+        .then((post) => {
+            res.render('post/updatePost', {
+                post,
+            });
+        });
+};
+
+exports.updatePost = (req, res, id, title, content) => {
+    models.post
+        .update(
+            {
+                title,
+                content,
+            },
+            {
+                where: { id },
+            }
+        )
+        .then(() => {
+            res.redirect('/');
+        });
+};
+
 exports.deletePost = (res, id) => {
     models.post
         .destroy({
