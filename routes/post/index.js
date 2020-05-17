@@ -69,7 +69,7 @@ router.get('/read', (req, res) => {
 router.put('/update/:id', (req, res) => {});
 
 // 포스트 삭제
-router.delete('/delete/:id', (req, res) => {
+router.post('/delete/:id', (req, res) => {
     const id = req.params.id;
     const secret = req.app.get('jwt-secret');
     if (!req.headers.cookie)
