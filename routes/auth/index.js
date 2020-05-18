@@ -16,7 +16,7 @@ router.post('/signup', (req, res) => {
         })
         .then((result) => {
             console.log('데이터 추가 완료: ' + result);
-            res.redirect('/user/signin');
+            res.redirect('/signin');
         })
         .catch((err) => {
             console.log('데이터 추가 실패' + err);
