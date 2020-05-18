@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
-app.use('/', require('./routes/main/index'));
+app.use('/', require('./routes/render/index'));
 app.use('/auth', require('./routes/auth/index'));
 app.use('/post', require('./routes/post/index'));
 
