@@ -4,21 +4,7 @@ const jwt = require('jsonwebtoken');
 const postMiddleware = require('../../middlewares/post/post');
 
 const router = express.Router();
-
 router.use(express.json());
-
-router.get('/signin', (req, res) => {
-    res.render('auth/signin', {});
-});
-
-router.get('/signup', (req, res) => {
-    res.render('auth/signup', {});
-});
-
-router.get('/logout', (req, res) => {
-    res.clearCookie('user');
-    res.redirect('/');
-});
 
 router.post('/signup', (req, res) => {
     const { id, password, username } = req.body;
@@ -29,13 +15,11 @@ router.post('/signup', (req, res) => {
             username: username,
         })
         .then((result) => {
-            console.log('데이터 추가 완료');
+            console.log('데이터 추가 완료: ' + result);
             res.redirect('/user/signin');
-            // res.json({ message: '회원가입 성공' });
         })
         .catch((err) => {
-            console.log('데이터 추가 실패');
-            console.log(err);
+            console.log('데이터 추가 실패' + err);
             res.json({ message: '회원가입 실패' });
         });
 });
