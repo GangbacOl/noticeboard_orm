@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const authMiddleware = (req, res, next) => {
+const authMiddleware = (req, res) => {
     const token = req.cookies.user;
     const secret = req.app.get('jwt-secret');
 
@@ -17,5 +17,11 @@ const authMiddleware = (req, res, next) => {
         });
     });
 
-    p.then((decoded) => {});
+    p.then(() => {
+        return true;
+    }).catch(() => {
+        return false;
+    });
 };
+
+module.exports = authMiddleware;
