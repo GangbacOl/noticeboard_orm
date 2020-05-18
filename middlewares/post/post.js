@@ -8,6 +8,25 @@ exports.getUsername = (name) => {
     exports.username = username;
 };
 
+exports.createPost = (res, title, content, author) => {
+    models.post
+        .create({
+            title,
+            author,
+            content,
+        })
+        .then(() => {
+            res.redirect('/');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.json({
+                message: '포스트 작성 실패',
+                err,
+            });
+        });
+};
+
 exports.readAllPost = (res) => {
     models.post
         .findAll({
