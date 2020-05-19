@@ -18,17 +18,32 @@ router.get('/update/:id', (req, res) => {
 router.post('/write', (req, res) => {
     const { title, content } = req.body;
     const author = postMiddleware.username;
-    if (authMiddleware(req, res)) {
-        postMiddleware.createPost(res, title, content, author);
+    if (!title || !content) {
+        res.render('post/error', {
+            message: '포스트 정보 미기입.',
+            type: 'create',
+        });
+    } else {
+        if (authMiddleware(req, res)) {
+            postMiddleware.createPost(res, title, content, author);
+        }
     }
 });
 
 // 포스트 업데이트
 router.post('/update/:id', (req, res) => {
-    const id = req.params.id;
     const { title, content } = req.body;
-    if (authMiddleware(req, res)) {
-        postMiddleware.updatePost(req, res, id, title, content);
+    const id = req.params.id;
+    if (!title || !content) {
+        res.render('post/error', {
+            message: '포스트 정보 미기입.',
+            type: 'update',
+            postId: id,
+        });
+    } else {
+        if (authMiddleware(req, res)) {
+            postMiddleware.updatePost(req, res, id, title, content);
+        }
     }
 });
 
