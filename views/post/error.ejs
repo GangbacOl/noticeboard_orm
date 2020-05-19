@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>CRUD notice board</title>
+    </head>
+    <body>
+        <h1>CRUD Notice Board</h1>
+        <h2>포스트 처리를 성공하지 못했습니다.</h2>
+        <p>원인: <%= message %></p>
+        <% if(type === 'create') {%>
+        <a href="/post/write">다시 작성하러 가기.</a>
+        <% } else { %>
+        <a href="/post/update/<%= postId %>">다시 작성하러 가기.</a>
+        <% } %>
+    </body>
+</html>
