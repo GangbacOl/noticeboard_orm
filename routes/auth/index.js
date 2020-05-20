@@ -1,7 +1,9 @@
 const express = require('express');
-const models = require('../../models');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const models = require('../../models');
 const postMiddleware = require('../../middlewares/post/post');
+const config = require('../config');
 
 const router = express.Router();
 router.use(express.json());
@@ -14,10 +16,14 @@ router.post('/signup', (req, res) => {
             type: 'signup',
         });
     } else {
+        const encrypted = crypto
+            .createHmac('sha1', config.secret)
+            .update(password)
+            .digest('base64');
         models.user
             .create({
                 account: id,
-                password: password,
+                password: encrypted,
                 username: username,
             })
             .then((result) => {
@@ -38,6 +44,11 @@ router.post('/signin', (req, res) => {
     const { id, password } = req.body;
     const secret = req.app.get('jwt-secret');
 
+    const encrypted = crypto
+        .createHmac('sha1', config.secret)
+        .update(password)
+        .digest('base64');
+
     models.user
         .findOne({
             where: { account: id },
@@ -50,13 +61,13 @@ router.post('/signin', (req, res) => {
                     type: 'signin',
                 });
             // 패스워드 오류 시
-            else if (userInfo.dataValues.password !== password)
+            else if (userInfo.dataValues.password !== encrypted)
                 res.render('auth/error', {
                     message: '패스워드가 일치하지 않음',
                     type: 'signin',
                 });
             // 로그인 성공 시
-            else if (userInfo.dataValues.password === password) {
+            else if (userInfo.dataValues.password === encrypted) {
                 const token = jwt.sign(
                     {
                         _id: id,
